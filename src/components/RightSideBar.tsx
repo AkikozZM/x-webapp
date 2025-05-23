@@ -5,9 +5,9 @@ import { GoSearch } from "react-icons/go";
 
 const RightSideBar = () => {
   return (
-    <section className="w-full ml-10 flex flex-col space-y-4 h-screen items-stretch">
+    <section className="w-full ml-10 flex flex-col space-y-4 h-screen items-stretch sticky top-0">
       {/* Search bar */}
-      <div className="sticky top-0 bg-white/10 backdrop-blur">
+      <div className="bg-white/10 backdrop-blur">
         <div>
           <div className="relative w-full h-full mt-2">
             <input
@@ -35,7 +35,7 @@ const RightSideBar = () => {
         </div>
       </div>
       {/* Scrollable content area */}
-      <div className="">
+      <div className="flex-1 overflow-y-auto no-scrollbar">
         {/* Subscribe to Premium */}
         <div className="flex flex-col space-y-2 p-4">
           <div className="font-bold text-xl">Subscribe to Premium</div>
