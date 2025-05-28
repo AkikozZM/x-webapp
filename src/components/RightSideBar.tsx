@@ -19,7 +19,7 @@ const RightSideBar = () => {
             />
             <div
               className="absolute top-full mt-0.5 peer-focus:block w-full bg-white px-4 border-b-40 border-t-5 hidden
-                 shadow-2xl py-4 border border-gray-200"
+                  py-4 border border-gray-200"
             >
               <p className="text-gray-500 text-sm">
                 Try searching for people, lists, or keywords
