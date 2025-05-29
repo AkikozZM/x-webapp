@@ -6,14 +6,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function SignupPage() {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignUp = async () => {
     try {
       const formData = new FormData();
-      formData.append("name", name);
+      formData.append("username", username);
       formData.append("email", email);
       formData.append("password", password);
       // Call the signup function with the form data
@@ -29,10 +29,10 @@ export default function SignupPage() {
     <AuthLayout title="Happening now" subtitle="Join today.">
       <form onSubmit={handleSignUp} className="flex flex-col space-y-4">
         <input
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Username"
           className="border-1 border-gray-300 rounded-full py-2 px-4 text-l"
           required
         />
