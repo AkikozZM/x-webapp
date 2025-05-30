@@ -16,7 +16,7 @@ const MainComponent = () => {
       </div>
       {/* Type bar */}
       <div className="border-t-[0.5px] border-b-[0.5px] border-gray-300 py-4 h-32 relative flex items-stretch space-x-2">
-        <div className="w-10 h-10 bg-slate-400 rounded-full flex-none ">A</div>
+        <div className="w-10 h-10 bg-slate-400 rounded-full flex-none "></div>
         <div className="flex flex-col w-full h-full">
           <input
             type="text"
