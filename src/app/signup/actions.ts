@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "../../../utils/supabase/server";
 
@@ -29,7 +27,8 @@ export async function signup(formData: FormData) {
       password,
       options: {
         data: {
-          username, // This goes to raw_user_meta_data
+          // This goes to raw_user_meta_data
+          username,
         },
         emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
       },
@@ -43,12 +42,12 @@ export async function signup(formData: FormData) {
       error: userError,
     } = await supabase.auth.getUser();
     if (userError || !user) throw new Error("User confirmation failed");
-
     return { success: true };
   } catch (error) {
     console.error("Full error:", error);
+    return {
+      error: error instanceof Error ? error.message : "Signup failed",
+      success: false,
+    };
   }
-
-  revalidatePath("/", "layout");
-  redirect("/");
 }

@@ -3,14 +3,20 @@
 import { signup } from "./actions";
 import AuthLayout from "@/components/Auth/AuthLayout";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent default form submission
+    setError(null); // Reset error state
+    // Validate inputs
     try {
       const formData = new FormData();
       formData.append("username", username);
@@ -19,19 +25,28 @@ export default function SignupPage() {
       // Call the signup function with the form data
       const result = await signup(formData);
       console.log("Signup result:", result);
+      if (result.error) {
+        // If there's an error, set the error state
+        setError(result.error);
+      } else {
+        // If signup is successful, redirect to the home page
+        router.push("/");
+        router.refresh();
+      }
     } catch (err) {
+      setError("An unexpected error occurred");
       console.error("Signup error:", err);
-      // Handle error appropriately, e.g., show a notification or alert
     }
   };
 
   return (
     <AuthLayout title="Happening now" subtitle="Join today.">
+      {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
       <form onSubmit={handleSignUp} className="flex flex-col space-y-4">
         <input
           onChange={(e) => setUsername(e.target.value)}
           type="text"
-          name="name"
+          name="username"
           placeholder="Username"
           className="border-1 border-gray-300 rounded-full py-2 px-4 text-l"
           required
