@@ -14,11 +14,11 @@ const RightSideBar = () => {
               id="searchBox"
               type="text"
               placeholder="Search"
-              className="outline-blue-400 peer bg-transparent border-1 border-black/20 w-full h-full rounded-2xl py-3 px-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white
+              className="outline-blue-400 bg-transparent border-1 border-black/20 w-full h-full rounded-2xl py-3 px-10 peer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white
                focus:shadow-md"
             />
             <div
-              className="absolute top-full mt-0.5 peer-focus:block w-full bg-white px-4 border-b-40 border-t-5 hidden
+              className="absolute top-full mt-0.5 w-full bg-white px-4 border-b-40 border-t-5 hidden peer-focus:block
                   py-4 border border-gray-200"
             >
               <p className="text-gray-500 text-sm">
