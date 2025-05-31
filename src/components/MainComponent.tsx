@@ -1,10 +1,11 @@
 import React from "react";
 import { BsDot, BsThreeDots } from "react-icons/bs";
 import { USER_ITERATIONS } from "@/constants/icons";
+import { UserAvatar } from "./User/UserProfile";
 
 const MainComponent = () => {
   return (
-    <main className="ml-72 px-4 flex w-[600px] h-full min-h-screen flex-col border-l border-r border-gray-300">
+    <main className="ml-72 px-4 flex w-[600px] h-full min-h-screen flex-col ">
       <div className="flex items-center justify-between sticky top-0 bg-white/10 backdrop-blur">
         <button className="hover:bg-black/10 w-full h-full p-4 cursor-pointer">
           <h1 className="text-l font-semibold">For you</h1>
@@ -15,8 +16,10 @@ const MainComponent = () => {
         </button>
       </div>
       {/* Type bar */}
-      <div className="border-t-[0.5px] border-b-[0.5px] border-gray-300 py-4 h-32 relative flex items-stretch space-x-2">
-        <div className="w-10 h-10 bg-slate-400 rounded-full flex-none "></div>
+      <div className=" py-4 h-32 relative flex items-stretch space-x-2">
+        <div className="flex-none">
+          <UserAvatar size={10} />
+        </div>
         <div className="flex flex-col w-full h-full">
           <input
             type="text"

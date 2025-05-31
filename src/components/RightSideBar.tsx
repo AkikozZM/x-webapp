@@ -54,7 +54,7 @@ const RightSideBar = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
-                className="py-2 border-b-[0.5px] border-gray-300 hover:bg-black/10 cursor-pointer rounded-xl transition duration-200"
+                className="py-2  hover:bg-black/10 cursor-pointer rounded-xl transition duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div className="font-bold">#Trending Title {i + 1}</div>
@@ -74,7 +74,7 @@ const RightSideBar = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
-                className="py-2 border-b-[0.5px] border-gray-300 hover:bg-black/10 cursor-pointer rounded-xl transition duration-200"
+                className="py-2  hover:bg-black/10 cursor-pointer rounded-xl transition duration-200"
               >
                 <div className="flex items-center justify-between">
                   <div className="font-bold">User {i + 1}</div>

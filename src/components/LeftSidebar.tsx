@@ -1,20 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { NAVIGATION_ITEMS } from "@/constants/icons";
-import { BsThreeDots } from "react-icons/bs";
 import { createClient } from "../../utils/supabase/client";
 import { useRouter } from "next/navigation";
-
-interface User {
-  user_metadata?: {
-    username?: string;
-  };
-  email?: string;
-}
+import { UserProfile } from "./User/UserProfile";
+import { BsThreeDots } from "react-icons/bs";
+import { useUser } from "./User/UserContext";
 
 const LeftSidebar = () => {
   const router = useRouter();
+  const user = useUser();
   const [showLogout, setShowLogout] = useState(false);
 
   const handleLogout = async () => {
@@ -23,19 +19,6 @@ const LeftSidebar = () => {
     router.refresh();
     router.push("/login");
   };
-
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    // Simulate fetching user data
-    const fetchUser = async () => {
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    fetchUser();
-  }, []);
 
   return (
     <section className="fixed w-66 flex-col flex items-stretch h-screen">
@@ -81,19 +64,7 @@ const LeftSidebar = () => {
           onClick={() => setShowLogout(!showLogout)}
           className="w-full rounded-full flex items-center justify-between py-5 px-2 text-black hover:bg-black/10 cursor-pointer transition duration-200"
         >
-          <div className="items-center justify-center flex space-x-2">
-            <div className="rounded-full bg-slate-400 w-10 h-10">
-              <div className="text-black text-lg flex items-center justify-center h-full">
-                {user?.user_metadata?.username?.charAt(0).toUpperCase() || ""}
-              </div>
-            </div>
-            <div className="text-left text-sm">
-              <div className="font-bold">
-                {user?.user_metadata?.username || "User"}
-              </div>
-              <div>@{user?.user_metadata?.username || "username"}</div>
-            </div>
-          </div>
+          <UserProfile />
           <div>
             <BsThreeDots />
           </div>
