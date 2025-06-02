@@ -24,7 +24,6 @@ export default function SignupPage() {
       formData.append("password", password);
       // Call the signup function with the form data
       const result = await signup(formData);
-      console.log("Signup result:", result);
       if (result.error) {
         // If there's an error, set the error state
         setError(result.error);
