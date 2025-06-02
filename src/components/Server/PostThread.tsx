@@ -1,48 +1,42 @@
 import React from "react";
 import { createClient } from "../../../utils/supabase/server";
+// import { createClient } from "../../../utils/supabase/client";
 
 const PostThread = () => {
   async function handlePost(formData: FormData) {
     "use server";
-    try {
-      // Get and validate post content
-      const postContent = formData.get("postContent")?.toString().trim();
-      if (!postContent) {
-        throw new Error("Post content cannot be empty");
-      }
+    const postContent = formData.get("postContent") as string;
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const secretKey = process.env.SUPABASE_SCRET_KEY;
 
-      // Get authenticated user
-      const supabase = await createClient();
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
+    if (!url || !secretKey) {
+      throw new Error("Supabase URL or secret key is not defined");
+    }
 
-      if (userError || !user) {
-        throw new Error("User not authenticated");
-      }
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-      // Insert the post
-      const { error: insertError } = await supabase
-        .from("tweets")
-        .insert({
-          id: crypto.randomUUID(),
-          user_id: user.id,
-          text: postContent,
-        })
-        .select();
+    if (authError || !user) {
+      console.error("Authentication error:", {
+        error: authError,
+        session: await supabase.auth.getSession(),
+      });
+      return;
+    }
 
-      if (insertError) {
-        console.error("Supabase insert error:", {
-          message: insertError.message,
-          details: insertError.details,
-          hint: insertError.hint,
-          code: insertError.code,
-        });
-        throw new Error(`Failed to create post: ${insertError.message}`);
-      }
-    } catch (error) {
-      console.error("Posting failed:", error);
+    const { error: insertError } = await supabase
+      .from("tweets")
+      .insert({
+        id: crypto.randomUUID(),
+        text: postContent,
+        user_id: user.id,
+      })
+      .select();
+    if (insertError) {
+      console.error("Error inserting post:", insertError);
     }
   }
 
