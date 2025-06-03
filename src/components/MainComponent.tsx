@@ -3,6 +3,7 @@ import { BsDot, BsThreeDots } from "react-icons/bs";
 import { USER_ITERATIONS } from "@/constants/icons";
 import { UserAvatar } from "./User/UserProfile";
 import PostThread from "./Server/PostThread";
+import { TweetList } from "./Server/TweetList";
 
 const MainComponent = () => {
   return (
@@ -23,24 +24,10 @@ const MainComponent = () => {
         </div>
         {/* Post Thread to Server */}
         <PostThread />
-        {/* <div className="flex flex-col w-full h-full">
-          <input
-            type="text"
-            className="p-4 w-full h-full bg-transparent outline-none border-none text-xl placeholder:text-gray-500"
-            placeholder="What's happening?"
-          />
-          <div className="w-full justify-between flex items-center">
-            <div></div>
-            <div className="w-full max-w-[100px]">
-              <button className="w-full rounded-full bg-black text-l py-2 px-4 text-white font-bold hover:bg-black/90 cursor-pointer transition duration-200">
-                Post
-              </button>
-            </div>
-          </div>
-        </div> */}
       </div>
       {/* User post threads */}
       <div className="flex flex-col">
+        <TweetList />
         {Array.from({ length: 10 }, (_, i) => (
           <div
             key={i}

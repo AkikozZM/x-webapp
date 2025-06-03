@@ -1,18 +1,10 @@
 import React from "react";
 import { createClient } from "../../../utils/supabase/server";
-// import { createClient } from "../../../utils/supabase/client";
 
 const PostThread = () => {
   async function handlePost(formData: FormData) {
     "use server";
     const postContent = formData.get("postContent") as string;
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const secretKey = process.env.SUPABASE_SCRET_KEY;
-
-    if (!url || !secretKey) {
-      throw new Error("Supabase URL or secret key is not defined");
-    }
-
     const supabase = await createClient();
     const {
       data: { user },
